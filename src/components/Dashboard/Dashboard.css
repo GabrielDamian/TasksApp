@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+.dashboard-container
+{
+    display: flex;
+    flex-direction: row;
+    min-width: 1280px;
+    min-height: 720px;
+}
+.dashboard-content
+{
+    width: 100%;
+    height: 100vh;
+    padding: 30px;
+    background-color: #F9F9F9;
+}
+.dashboard-padding
+{
+    width: 100%;
+    height: 100%;
+}
+.upper-dashbord
+{
+    width: 100%;
+    height: 40%;
+}
+
+.title-tab
+{
+    width: 100%;
+    height: 10%;
+}
+.main-stats
+{
+    width: 100%;
+    height: 90%;
+}
+.text-data
+{
+    height: 30%;
+}
+.cards-data
+{
+    width: 100%;
+    height: 70%;
+}
+.title-tab > span 
+{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 900;
+    font-size: 1vw;
+}
+.today-date
+{
+    height: 70%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 2vw;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+.today-date-info
+{
+    height: 30%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.little-card-today-info
+{
+    height: 100%;
+    width: 15%;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
+    font-weight: 900;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.little-card-today-info > img
+{
+    height: 1vw;
+    margin-right: 5px;
+}
+
+.card-data-padding
+{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.lower-dashboard
+{
+    width: 100%;
+    height: 60%;
+    border: 1px solid red;
+    border-radius: 10px;
+    background-color: white;
+    border: 2px solid #EBEBEB;
+    padding: 8px;
+}
