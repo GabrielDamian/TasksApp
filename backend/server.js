@@ -45,7 +45,35 @@ app.post('/create-todo',(req,res)=>{
             res.status(500).send(err.message)
         })
 })
+app.post('/checked-days-in-month',(req,res)=>{
+    
+    //luna in care trebuie scoase datele in ale caror zile exista cel putin un todo
+    let month = req.body.month;
 
+    //vector care contine datele (duplicate daca exista mai mult todos in aceeasi zi)
+    let todos_in_month = []
+
+    Todo.find((err,todos)=>{
+        if(err){
+            console.log(err)
+            res.status(404).send("Error")
+        }
+        else
+        {
+            todos.forEach((el)=>{
+                if(el.month == month)
+                {
+                todos_in_month.push(el.day)
+                }
+            })
+            //vrem vector unic care contine zilele din luna primita in care exista cel putin un todo setat
+            let todos_in_month_uniques = [...new Set(todos_in_month)]
+            res.json(todos_in_month_uniques)
+        } 
+       
+    })
+    
+})
 
 
 

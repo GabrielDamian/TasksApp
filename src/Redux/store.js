@@ -17,8 +17,12 @@ import reducer from './reducer';
 //                     }
 //                 ]
 //             }
-// ]
-//     }
+//               ]
+//     ,
+//      shchedule-state:
+//      {
+//          current-state: 'empty' || 'schedule-new' || 'schedule-old'
+//      }
 // }
 
 

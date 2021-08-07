@@ -1,4 +1,4 @@
-const timeData = {
+export const timeData = {
     'January':{
         days: 31,
         weeks:{
@@ -121,3 +121,5 @@ const timeData = {
         }
     },
 }
+
+export let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

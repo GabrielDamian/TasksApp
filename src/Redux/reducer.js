@@ -7,14 +7,7 @@ function reducer(state={categories:{}},action)
 {
     switch(action.type)
     {
-        case 'action_1':
-            return {
-                ceva: 'altceva'
-            }
-        case 'action_2':
-            return {
-                ceva: 'ceva'
-            }
+
         case 'add-category':
             let temp = state;
             if(state.categories.current_categories != undefined)

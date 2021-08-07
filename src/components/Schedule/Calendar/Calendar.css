@@ -74,7 +74,7 @@
     margin: 3px;
     border-radius: 3px;
     background-color: white;   
-    border: 1px solid #cfcfcf;
+    border: 2px solid #cfcfcf;
 }
 .day-itself-number
 {
@@ -84,4 +84,16 @@
 .day-itself-checked
 {
     height: 70%;
+}
+.reduced-opacity
+{
+    opacity: 0.5;
+}
+.today-selector
+{
+    border: 2px solid red;
+}
+.selected-day
+{
+    border: 2px solid blue;
 }
