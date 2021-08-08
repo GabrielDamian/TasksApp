@@ -29,3 +29,16 @@ export function removeTaskFromCategory(input)
         }
     })
 }
+
+export function changeStateEmptyCategories(newState, currentDay, currentMonthNumber)
+{
+    //mewState = 'empty' || 'schedule-new' || 'schedule-old'
+    store.dispatch({
+        type: 'change-state-empty-categories',
+        payload:{
+            newState: newState,
+            selectedDay: currentDay,
+            selectedMonth: currentMonthNumber
+        }
+    })
+}

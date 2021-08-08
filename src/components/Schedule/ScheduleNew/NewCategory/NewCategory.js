@@ -12,13 +12,23 @@ const NewCategory = ({id,title})=>{
         store.subscribe(()=>{
             let arrayObj = store.getState().categories.categories;
             let correctObj;
-            arrayObj.map((el)=>{
-                if(el.id == id)
+            //!= undefined previne cazul in care am dat click pe alta zi si am
+            //golit fortat categories din redux (newCategory inca exista si se 
+            //asteapta sa gaseasca date acolo)
+            if(arrayObj != undefined)
+            {
+                arrayObj.map((el)=>{
+                    if(el.id == id)
+                    {
+                        correctObj = {...el}
+                    }
+                }) 
+                if(correctObj != undefined)
                 {
-                    correctObj = {...el}
+                    setTasks([...correctObj.tasks])
                 }
-            }) 
-            setTasks([...correctObj.tasks])
+            }
+           
         })
     },[])
 

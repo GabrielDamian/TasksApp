@@ -4,6 +4,7 @@ import LeftArrow from '../../../images/left-arrow.png';
 import RightArrow from '../../../images/right-arrow.png';
 import Check from '../../../images/check.png';
 import { months,timeData} from '../../../temp';
+import {emptyCategories,changeStateEmptyCategories} from '../../../Redux/actions';
 
 const Calendar = ()=>{
 
@@ -13,11 +14,13 @@ const Calendar = ()=>{
     //ex:August
     const [currentMonthLocal, setCurrentMonthLocal] = useState(null);
     
+    //ziua pe care s-a facut click (blue)
+    const [selectedDay, setSelectedDay] = useState(null);
+
     //vector de [10,14,18], zilele primite de la api in care este cel putin un todo scheduled
     const [arrayChecked, setArrayChecked] = useState([])
 
-    //ziua pe care s-a facut click (blue)
-    const [selectedDay, setSelectedDay] = useState(null);
+
 
     useEffect(()=>{
         var date = new Date();
@@ -80,6 +83,20 @@ const Calendar = ()=>{
 
     const handleClickOnDay = (day_number)=>{
         console.log("Click pe day nr:", day_number)
+        //la click pe o zi noua, goleste categories
+        //if clicked-day = inside api array
+        //changeState to cheduleOld
+        //else
+        //changeState to scheduleNew
+        if(arrayChecked.includes(day_number))
+        {
+            changeStateEmptyCategories('schedule-old',day_number, numberMonth)
+        }
+        else
+        {
+            changeStateEmptyCategories('schedule-new',day_number, numberMonth)
+        }
+
         setSelectedDay(day_number);
     }
 

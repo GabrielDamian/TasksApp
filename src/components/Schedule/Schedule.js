@@ -5,14 +5,30 @@ import Calendar from './Calendar/Calendar';
 import ScheduleNew from './ScheduleNew/ScheduleNew';
 import ScheduleOld from './ScheduleOld/ScheduleOld';
 import EmptySchedule from './EmptySchedule';
-
+import store from '../../Redux/store';
 const Schedule = ()=>{
 
     const [currentState, setCurrentState] = useState('empty-state');
 
     useEffect(()=>{
+        store.subscribe(()=>{
+
+            let currentReduxState = store.getState().scheduleState.state;
+            setCurrentState(currentReduxState);
+        })
         
     })
+    const handleStateJSX = ()=>{
+        switch(currentState)
+        {
+            case 'schedule-new':
+                return <ScheduleNew />
+            case 'schedule-old':
+                return <ScheduleOld />
+            default:
+                return <EmptySchedule />
+        }
+    }
     return(
         <div className="dashboard-container">
             <LeftBar selected="schedule"/>
@@ -27,7 +43,10 @@ const Schedule = ()=>{
                     </div>
                    </div>
                    <div className="schedule-content-selector">
-                        <ScheduleNew />
+                        {/* <ScheduleNew /> */}
+                        {
+                          handleStateJSX()
+                        }
                    </div>
                </div>
             </div>

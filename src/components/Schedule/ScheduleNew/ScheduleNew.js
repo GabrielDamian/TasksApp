@@ -41,8 +41,13 @@ const useStyles = makeStyles((theme) => ({
 const ScheduleNew = ()=>
 {
     const classes = useStyles();
+
     //show indicator = true daca nu este nicio categorie pentru ziua x
-    const [showIndicator, setShowIndicator] = useState(true);
+    const [showIndicator, setShowIndicator] = useState({
+        show: true,
+        text: '*This day is empty, add new category first'
+    });
+    
 
     //categories care ca default necesar, null
     const [categories, setCategories] = useState(null);
@@ -58,8 +63,9 @@ const ScheduleNew = ()=>
     useEffect(()=>{
         store.subscribe(()=>{
             let data = store.getState();
+            console.log("STATE:",data)
             let categoriesRedux = store.getState().categories.categories;
-            if(categoriesRedux.length == 0)
+            if(categoriesRedux == undefined )
             {
                 setCategories(null)
             } 
@@ -70,13 +76,84 @@ const ScheduleNew = ()=>
             
         })
     },[])
+    useEffect(()=>{
+        if(categories != null)
+        {
+            setShowIndicator({
+                show: false,
+                text: '*This day is empty, add new category first'
+            });
+        }
+        else
+        {
+            setShowIndicator({
+                show: true,
+                text: '*This day is empty, add new category first'
+            });
+        }
+    },[categories])
+    
+    const checkCategoriesBeforeSave = ()=>{
+        if(categories != undefined)
+        {
+            for(let x in categories)
+            {
+                let temp_arr = categories[x].tasks;
+                if(temp_arr.length == 0)
+                {
+                    return false
+                }
+            }
+            return true;
+        }        
+        return false;
+    }
+    const handleSaveDay = ()=>{
+        //inainte de a face POST, verifica ca:1) categories != null, fiecare categories sa aiba cel putin un task
+
+        if(checkCategoriesBeforeSave())
+        {
+            console.log("should POST")
+            
+            asyncPOST();
+            window.location.reload(false);
+        }
+        else
+        {
+            console.log("Each category should have at least one task")
+            setShowIndicator({
+                show: true,
+                text: 'Each category should have at least one task.'
+            })
+        }
+    }
+    const asyncPOST = async()=>{
+        // console.log("TEST:",categories)
+        // console.log("day",store.getState().scheduleState.selectedDay)
+        // console.log("month",store.getState().scheduleState.selectedMonth)
+
+        let response = await fetch('http://localhost:4000/post-new-tasks',{
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                tasks: categories,
+                day: store.getState().scheduleState.selectedDay,
+                month: store.getState().scheduleState.selectedMonth
+            })
+        }
+            
+        )
+    }
     return(
        <div className="schedulenew-container">
            <div className="schedulenew-container-padding">
                <div className="schedulenew-container-title-tab">
                    <div className="schedulenew-title-indication">
-                        {showIndicator ? 
-                        <span>*This day is empty, add new category first</span>
+                        {showIndicator.show ? 
+                        <span>{showIndicator.text}</span>
                             :
                         null
                     }
@@ -98,6 +175,7 @@ const ScheduleNew = ()=>
                             Category
                         </Button>
                         <Button
+                            onClick={handleSaveDay}
                             variant="contained"
                             color="primary"
                             className={classes.buttonAddCategory}

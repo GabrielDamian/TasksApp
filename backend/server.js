@@ -38,7 +38,7 @@ app.post('/create-todo',(req,res)=>{
     newTodo
         .save()
         .then((todo)=>{
-            console.log("Todo create cu succes")
+            console.log("Todo created with succes")
             res.json(req.body)
         })
         .catch((err)=>{
@@ -73,6 +73,39 @@ app.post('/checked-days-in-month',(req,res)=>{
        
     })
     
+})
+
+
+app.post('/post-new-tasks',(req,res)=>{
+    let day = req.body.day;
+    let month = req.body.month;
+    let categories = req.body.tasks;
+    console.log(day,month,categories)
+    
+    categories.forEach((el)=>{
+
+        let category_title = el.title;
+
+        let tasks_arr = el.tasks;
+
+        tasks_arr.forEach((task_el)=>{
+
+            let newTodo =  new Todo({
+                title: task_el.title,
+                content: task_el.content,
+                category: category_title,
+                month: month,
+                day: day
+            });
+            newTodo
+                .save()
+                .catch((err)=>{
+                    res.status(500).send(err.message)
+                })
+        })
+        console.log("tasks",el.tasks)
+    })
+    res.json({ceva:'ceva'})
 })
 
 

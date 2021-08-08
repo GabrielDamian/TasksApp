@@ -19,7 +19,7 @@ import reducer from './reducer';
 //             }
 //               ]
 //     ,
-//      shchedule-state:
+//      scheduleState:
 //      {
 //          current-state: 'empty' || 'schedule-new' || 'schedule-old'
 //      }
