@@ -10,8 +10,9 @@ import SaveIcon from '@material-ui/icons/Save';
 import NewCategory from './NewCategory/NewCategory';
 import Modal from '@material-ui/core/Modal';
 import ModalComp from './ModalComp';
+import {changeStateEmptyCategories,} from '../../../Redux/actions';
 
-export const theme_1 = createTheme({
+const theme_1 = createTheme({
   palette: {
     primary: {
       light: '#d0cdfe',
@@ -63,7 +64,6 @@ const ScheduleNew = ()=>
     useEffect(()=>{
         store.subscribe(()=>{
             let data = store.getState();
-            console.log("STATE:",data)
             let categoriesRedux = store.getState().categories.categories;
             if(categoriesRedux == undefined )
             {
@@ -113,10 +113,8 @@ const ScheduleNew = ()=>
 
         if(checkCategoriesBeforeSave())
         {
-            console.log("should POST")
-            
             asyncPOST();
-            window.location.reload(false);
+            window.location.reload();
         }
         else
         {

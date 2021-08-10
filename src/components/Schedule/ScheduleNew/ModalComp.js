@@ -6,6 +6,18 @@ import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import {theme_1} from './ScheduleNew';
 import { addCategory} from '../../../Redux/actions';
+import { createTheme } from '@material-ui/core/styles';
+
+const theme_2 = createTheme({
+    palette: {
+      primary: {
+        light: '#d0cdfe',
+        main: '#a29bfe',
+        dark: '#7268fd',
+        contrastText: '#fff',
+      },
+    },
+  });
 
 const useStyles = makeStyles((theme) => ({
     exitModalButton: {
@@ -73,7 +85,7 @@ const ModalComp = ({closeModal})=>{
                         value={input}
                         onChange={handleInputChange}
                     />
-                    <ThemeProvider theme={theme_1}>
+                    <ThemeProvider theme={theme_2}>
                         <Button 
                             className={classes.saveModalButton}
                             onClick={saveModal} 

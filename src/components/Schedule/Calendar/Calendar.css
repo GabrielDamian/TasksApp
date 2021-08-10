@@ -2,7 +2,7 @@
 
 .calendar-container
 {
-    width: 45%;
+    width: 70%;
     height: 100%;
     padding: 10px;
     border-radius: 10px;
@@ -39,7 +39,7 @@
 }
 .calendar-month-selector span 
 {
-    font-size: 1.8vw;
+    font-size: 1.5rem;
 
     font-weight: 900;
 }
@@ -80,6 +80,7 @@
 {
     height: 100;
     width: 50%;
+    font-size: 0.8rem;
 }
 .day-itself-checked
 {

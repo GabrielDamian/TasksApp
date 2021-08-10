@@ -38,15 +38,33 @@
 .insert-taks-cat-title
 {
     height: 20%;
-    padding: 8px;
     display: flex;
-    align-items: center;
-    justify-content: center
+    flex-direction: row;
 }
-.insert-taks-cat-title p 
+
+
+.insert-taks-cat-title-itself
 {
-    font-family: 'Ubuntu', sans-serif;
-    
+  height: 100%;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  
+}
+.insert-taks-cat-title-itself p 
+{
+  padding: 2px 0px 0px 12px;
+  font-family: 'Ubuntu', sans-serif;
+}
+.insert-taks-cat-remove-cat-btn
+{
+  height: 100%;
+  width: 20%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 2px 10px 0px 0px;
 }
 .insert-task-task-input
 {
@@ -70,6 +88,26 @@
   padding: 0px 5px;
   width: 80%;
 }
+
+
+
+.insert-taks-inputs input 
+{
+  outline: none;
+  border: 2px solid transparent;
+}
+
+
+.insert-taks-inputs input:focus 
+{
+  outline: none;
+  border: 2px solid transparent;
+  border-bottom: 2px solid #a29bfe;
+  transition: border-bottom 0.5s;
+}
+
+
+
 .insert-taks-inputs textarea
 {
   resize: none;
@@ -77,10 +115,25 @@
   margin-top: 5px;
   padding: 2px 5px;
   width: 90%;
+  outline: none;
+  border: 2px solid transparent;
+}
+.insert-taks-inputs textarea:focus
+{
+  outline: none;
+  border: 2px solid transparent;
+  border-bottom: 2px solid #a29bfe;
+  transition: border-bottom 0.5s;
 }
 .insert-task-task-input button 
 {
   width: 50%;
   height: 25%;
   align-self: center;
+}
+.pop-over-container
+{
+  font-family: 'Ubuntu', sans-serif;
+  padding: 10px;
+  border-radius: 10px;
 }

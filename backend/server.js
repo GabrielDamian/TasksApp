@@ -80,7 +80,6 @@ app.post('/post-new-tasks',(req,res)=>{
     let day = req.body.day;
     let month = req.body.month;
     let categories = req.body.tasks;
-    console.log(day,month,categories)
     
     categories.forEach((el)=>{
 
@@ -103,14 +102,57 @@ app.post('/post-new-tasks',(req,res)=>{
                     res.status(500).send(err.message)
                 })
         })
-        console.log("tasks",el.tasks)
     })
     res.json({ceva:'ceva'})
 })
 
 
+app.post('/info-old-day',(req,res)=>{
+    let day = req.body.day;
+    let month = req.body.month;
+    let res_arr = []
+    Todo.find((err,todos)=>{
+        if(err)
+        {
+            console.log(err);
+            res.status(500).send("eroare");
+        }
+        else
+        {
+            todos.forEach((el)=>{
+                if(el.day == day && el.month == month)
+                {
+                    res_arr.push(el);
+                }
+            })
+            res.json(res_arr);
+        }
+    })
+})
+app.post('/remove-task', (req,res)=>{
+    let id_req= req.body.id;
+    Todo.findOneAndDelete({_id: id_req}, function(err){
+        if(err){
+            console.log(err)
+            res.status(500).json({res:"failed"})
+        }
+        else
+        {
+            res.json({res:"succes"})
+        }
+    })
+})
+app.post('/remove-entire-category',(req,res)=>{
+    let category_name = req.body.cat_name;
+    Todo.deleteMany({category: category_name})
+    .then(()=>{
+        res.send({succes: "true"})
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
 
-
+})
 app.listen(PORT,()=>{
     console.log(`Server is listening on port: ${PORT}`);
 })

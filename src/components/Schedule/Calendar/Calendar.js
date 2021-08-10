@@ -4,7 +4,15 @@ import LeftArrow from '../../../images/left-arrow.png';
 import RightArrow from '../../../images/right-arrow.png';
 import Check from '../../../images/check.png';
 import { months,timeData} from '../../../temp';
-import {emptyCategories,changeStateEmptyCategories} from '../../../Redux/actions';
+import {
+    emptyCategories,
+    changeStateEmptyCategories,
+    changetriggerReRenderState
+} from '../../../Redux/actions';
+
+import store from '../../../Redux/store';
+
+
 
 const Calendar = ()=>{
 
@@ -19,23 +27,6 @@ const Calendar = ()=>{
 
     //vector de [10,14,18], zilele primite de la api in care este cel putin un todo scheduled
     const [arrayChecked, setArrayChecked] = useState([])
-
-
-
-    useEffect(()=>{
-        var date = new Date();
-        setNumberMonth(date.getMonth())
-    },[])
-
-    useEffect(()=>{
-        //new Date() ne ofera nr lunii, cu vectorul months afla denumirea lunoo
-        setCurrentMonthLocal(months[numberMonth])
-    },[numberMonth])
-
-    useEffect(()=>{
-        //cand trec la o luna noua, nu vr sa am selectata ziua din luna precedenta
-        setSelectedDay(null)
-    },[numberMonth])
 
     const daysChecked = async()=>{
         let days = await fetch('http://localhost:4000/checked-days-in-month',{
@@ -54,10 +45,32 @@ const Calendar = ()=>{
         .catch(err=>console.log(err))
         setArrayChecked(days)
     }
+
+
+
+    useEffect(()=>{
+        var date = new Date();
+        setNumberMonth(date.getMonth())
+    },[])
+
+    useEffect(()=>{
+        //new Date() ne ofera nr lunii, cu vectorul months afla denumirea lunoo
+        setCurrentMonthLocal(months[numberMonth])
+    },[numberMonth])
+
+    useEffect(()=>{
+        //cand trec la o luna noua, nu vr sa am selectata ziua din luna precedenta
+        setSelectedDay(null)
+    },[numberMonth])
+
+
     useEffect(()=>{
         //fetch la api pentru vector de checked
         daysChecked()
     },[numberMonth])
+
+
+
 
 
     const nextMonth = ()=>{
@@ -130,8 +143,7 @@ const Calendar = ()=>{
         //today_selector
         //urm 2 if's pentru zilele din luna curenta
         let today_day = new Date();
-        let day = today_day.getDay();
-
+        let day = today_day.getDate();
         let classDayItSelf = 'day-itself'
 
         if(day == day_nr && numberMonth == today_day.getMonth())

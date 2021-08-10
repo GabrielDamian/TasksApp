@@ -8,9 +8,17 @@ import {addTaskToCategory,removeTaskFromCategoryUtil} from '../utils/functions';
 //         selectedDay: 10,
 //         selectedMonth: 4
 //     }
+//     triggerReRender:{
+//       calendar: false
+//}
 // }
 
-function reducer(state={categories:{},scheduleState:{state: 'empty'}},action)
+let initialState ={
+    categories:{},
+    scheduleState:{state: 'empty'},
+    triggerReRender:{calendar:false}
+}
+function reducer(state=initialState,action)
 {
     switch(action.type)
     {
@@ -100,6 +108,29 @@ function reducer(state={categories:{},scheduleState:{state: 'empty'}},action)
                     state: action.payload.newState,
                     selectedDay: action.payload.selectedDay,
                     selectedMonth: action.payload.selectedMonth
+                }
+            }
+        case 'remove-category':
+            let currentCategories = state.categories.categories;
+
+            let id_to_remove = action.payload.id;
+            let current_cat_number = state.categories.current_categories;
+
+            let new_categories_arr = [];
+
+            currentCategories.forEach((el)=>{
+                if(el.id != id_to_remove)
+                {
+                    new_categories_arr.push(el);
+                }
+            })
+            
+
+            return{
+                ...state,
+                categories:{
+                    current_categories: current_cat_number-1,
+                    categories: [...new_categories_arr]
                 }
             }
         default: 

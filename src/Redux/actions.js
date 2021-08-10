@@ -42,3 +42,13 @@ export function changeStateEmptyCategories(newState, currentDay, currentMonthNum
         }
     })
 }
+
+export function removeCategory (cat_id)
+{
+    store.dispatch({
+        type: 'remove-category',
+        payload:{
+            id:cat_id
+        }
+    })
+}
