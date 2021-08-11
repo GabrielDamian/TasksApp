@@ -1,9 +1,18 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import './LowerDash.css';
 import SwitchButton from './SwitchButton';
 import CategoryTasks from './CategoryTasks';
 
 const LowerDash = ()=>{
+
+    const [categoriesToday, setCategoriesToday] = useState(null);
+    useEffect(()=>{
+
+    },[])
+    const getCategoriesApi =async ()=>
+    {
+        //!!!!!!!!!!
+    }
     return (
         <div className="lower-dash-container">
             <div className="task-intro">
@@ -12,10 +21,12 @@ const LowerDash = ()=>{
             </div>
             <div className="lower-dash-content">
                 <div className="lower-dash-content-padding">
-                    <CategoryTasks />
-                    <CategoryTasks />
-                    <CategoryTasks />
-                    <CategoryTasks />
+                    {/* <CategoryTasks /> */}
+                    {categoriesToday == null ? null :
+                        categoriesToday.map((el)=>{
+                            return <CategoryTasks cat_title={el.cat_title}/>
+                        }) 
+                    }
                 </div>
             </div>
         </div>

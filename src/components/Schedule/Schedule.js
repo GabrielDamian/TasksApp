@@ -33,7 +33,7 @@ const Schedule = ()=>{
         }
     }
     return(
-        <div className="dashboard-container">
+        <div className="dashboard-schedule-container">
             <LeftBar selected="schedule"/>
             <div className="schedule-container">
                <div className="schedule-content-padding">

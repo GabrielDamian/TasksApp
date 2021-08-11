@@ -3,6 +3,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const PORT = 4000;
 const Todo = require('./models/Todo');
+const Day = require('./models/Day');
 
 mongoose.connect('mongodb://127.0.0.1:27017/todo-app',{useNewUrlParser: true});
 mongoose.connection.once('open',()=>{
@@ -153,6 +154,79 @@ app.post('/remove-entire-category',(req,res)=>{
     })
 
 })
+
+//check is one day is empty (if at least one task exists in that day)
+app.post('/check-empty-day', (req,res)=>{
+    let day = req.body.day;
+    let month = req.body.month;
+
+    Todo.find((err,todos)=>{
+        if(err)
+        {
+            console.log(err);
+            res.status(500).send("eroare");
+        }
+        else
+        {
+            let boolean = false;
+            todos.forEach((el)=>{
+                if(el.day == day && el.month == month)
+                {
+                    boolean =true;
+                }
+            })
+            res.json({
+                contentExist: boolean
+            })
+        }
+    })
+})
+app.post('/check-day-info', async (req,res)=>{
+//daca ziua nu exista, o creez
+//daca ziua exista, doar intorc datele existente
+
+    let day_nr = req.body.day_nr;
+    let month_nr = req.body.month_nr;
+    
+    //arr care contine cel mult o zi care are day si month cu cele de astazi
+    let today_day = await Day.find({
+        day_nr: day_nr,
+        month_nr: month_nr,
+    })
+
+    if(today_day.length == 0)
+    {
+        //ziua nu exista, trebuie creeata
+        console.log("creez zi noua !")
+
+        //cate task-uri sunt setate in aceasta zi, vector
+        let promise_counter = await Todo.find({day: day_nr, month: month_nr});
+
+        //*uncompletedTasks are default nr total de task-uri, urmand sa se decrementeze pe 
+        //masura ce sunt finalizate task-urile din lowerDash
+        let new_day = Day({
+            day_nr: day_nr,
+            month_nr: month_nr,
+            totalTasks: promise_counter.length,
+            workedMinutes: 0,
+            completedTask: 0,
+            failedTasks: 0,
+            uncompletedTasks: promise_counter.length
+        })
+
+        new_day
+            .save()
+            .then((new_created_day)=>{res.json(new_created_day)})
+            .catch((err)=>{console.log(err)})
+        }
+    else
+    {
+        console.log("ziua exista deja, doar o intorc!")
+        res.json(today_day[0])
+    }
+})
+
+
 app.listen(PORT,()=>{
     console.log(`Server is listening on port: ${PORT}`);
 })

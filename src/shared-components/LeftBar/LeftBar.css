@@ -7,6 +7,7 @@
 .left-bar-container{
     height: 100vh;
     width: 15%;
+    min-width: 250px;
     -webkit-box-shadow: 5px 0px 14px -11px rgba(0,0,0,0.29); 
     box-shadow: 5px 0px 14px -11px rgba(0,0,0,0.29);
     overflow: hidden;

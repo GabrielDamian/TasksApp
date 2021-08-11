@@ -8,6 +8,7 @@ import Icon from '@material-ui/core/Icon';
 import SaveIcon from '@material-ui/icons/Save';
 import CheckSharpIcon from '@material-ui/icons/CheckSharp';
 import MoreHorizSharpIcon from '@material-ui/icons/MoreHorizSharp';
+import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 
 const useStyles = makeStyles((theme) => ({
     buttonRed: {
@@ -74,7 +75,7 @@ const TaskItem =({usedIn,title,content})=>{
                 variant="contained"
                 color="secondary"
                 className={classes.buttonRed}
-                startIcon={<DeleteIcon style={{ fontSize: 15,marginLeft: '8px' }}/>}
+                startIcon={<SentimentVeryDissatisfiedIcon style={{ fontSize: 15,marginLeft: '8px' }}/>}
             />
             <Button
                 size="small"
