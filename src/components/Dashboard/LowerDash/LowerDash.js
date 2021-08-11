@@ -3,7 +3,7 @@ import './LowerDash.css';
 import SwitchButton from './SwitchButton';
 import CategoryTasks from './CategoryTasks';
 
-const LowerDash = ({refetch_api})=>{
+const LowerDash = ({refetch_api,upperDashData})=>{
 
     const [categoriesToday, setCategoriesToday] = useState(null);
     // [
@@ -20,6 +20,10 @@ const LowerDash = ({refetch_api})=>{
         console.log("pola")
         getCategoriesApi();
     },[])
+    useEffect(()=>{
+
+        getCategoriesApi();
+    },[upperDashData])
 
     const getCategoriesApi =async ()=>
     {
@@ -69,7 +73,7 @@ const LowerDash = ({refetch_api})=>{
         <div className="lower-dash-container">
             <div className="task-intro">
                 <span>Tasks</span>
-                <SwitchButton />
+                <SwitchButton refetch_api={refetch_api}/>
             </div>
             <div className="lower-dash-content">
                 <div className="lower-dash-content-padding">

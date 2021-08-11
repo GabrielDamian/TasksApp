@@ -64,10 +64,11 @@ const TaskItem =({refetch_api,data_task})=>{
                 id: data_task._id
             })
         })
+        //dam timp lui db sa se updateze
         setTimeout(()=>{
             refetch_api()
         },2000)
-        
+
         let response = await fetch('http://localhost:4000/increment-today-data',{
             method: 'POST',
             headers: {

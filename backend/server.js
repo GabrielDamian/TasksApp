@@ -255,6 +255,7 @@ app.post('/increment-today-data',async (req,res)=>{
                 res.json(update_now_completed);
                 break
             case 'workedMinutes':
+                //un increment aici inseamna 10 secunde contorizate de switch
                 console.log("increment workedMinutes")
                 let old_data_timer = today_old_obj.workedMinutes;
                 let update_now_timer = await Day.findOneAndUpdate({day_nr: day, month_nr:month},{workedMinutes:old_data_timer+1})

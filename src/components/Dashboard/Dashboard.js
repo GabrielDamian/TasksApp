@@ -11,11 +11,9 @@ import {months} from '../../temp';
 const Dashboard = ()=>{
 
     const [stateRender, setStateRender] = useState(null);
-    const [timpRamasAzi, setTimpRamasAzi] = useState('');
 
 
-    //decomenteaza final
-    
+    //decomenteaza final    
     // useEffect(()=>{
     //     let intervalPointer = setInterval(()=>{
     //         setTimpRamasAzi(calculTimpRamasDinAzi())
@@ -25,6 +23,20 @@ const Dashboard = ()=>{
     //     })
     // },[])
 
+    useEffect(()=>{
+        let temp_inteval = setInterval(()=>{
+            setUpperDashData((prev)=>{
+                return{
+                    ...prev,
+                    timeLeft: calculTimpRamasDinAzi()
+                }
+
+            })
+        },60000)
+        return (()=>{
+            clearInterval(temp_inteval)
+        })
+    })
     const [upperDashData, setUpperDashData] = useState({
         today_day:0,
         today_month:0,
@@ -33,12 +45,13 @@ const Dashboard = ()=>{
         totalWorkedToday:0,
         completedTasks: 0,
         failedTasks: 0,
-        categories_full_data: []
+        categories_full_data: [],
+        timeLeft: 0
     });
     
     useEffect(()=>{
         decideEmptyDay(calculTimpRamasDinAzi);
-    })
+    },[])
     useEffect(()=>{
         if(stateRender == 'lower-dash')
         {
@@ -72,7 +85,8 @@ const Dashboard = ()=>{
             totalTasks: res_json.totalTasks,
             totalWorkedToday: res_json.workedMinutes,
             completedTasks: res_json.completedTask,
-            failedTasks: res_json.failedTasks
+            failedTasks: res_json.failedTasks,
+            timeLeft: calculTimpRamasDinAzi()
         })
     }
     const calculTimpRamasDinAzi = ()=>{
@@ -94,8 +108,8 @@ const Dashboard = ()=>{
         {
             let hours = Math.floor(seconds/3600);
             let minutes = Math.floor((seconds - 3600*hours)/60);
-            let seconds_r = seconds - (3600*hours) - 60*minutes;
-            final_string = `${hours}h ${minutes}m ${seconds_r}s`;
+            // let seconds_r = seconds - (3600*hours) - 60*minutes;
+            final_string = `${hours}h ${minutes}m`;
         }
         return final_string;
     }
@@ -132,7 +146,7 @@ const Dashboard = ()=>{
         switch(stateRender)
         {
             case 'lower-dash':
-                return <LowerDash refetch_api={apiCurrentDay}/>
+                return <LowerDash refetch_api={apiCurrentDay} upperDashData={upperDashData}/>
             case 'empty-lower-dash':
                 return <EmptyLowerDash />
             default:
@@ -166,7 +180,7 @@ const Dashboard = ()=>{
                                 </div>
                                 <div className="little-card-today-info">
                                     <img src={LittleClockIcon} alt="time left icon" />
-                                        <span>Time left: {timpRamasAzi}</span>
+                                        <span>Time left: {upperDashData.timeLeft}</span>
                                 </div>
                                </div>
                             </div>
