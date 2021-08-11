@@ -6,6 +6,7 @@ import LittleClockIcon from '../../images/clock.png';
 import Cards from './Cards/Cards';
 import LowerDash from './LowerDash/LowerDash';
 import EmptyLowerDash from './EmptyLowerDash/EmptyLowerDash';
+import {months} from '../../temp';
 
 const Dashboard = ()=>{
 
@@ -13,17 +14,26 @@ const Dashboard = ()=>{
     const [timpRamasAzi, setTimpRamasAzi] = useState('');
 
 
-    useEffect(()=>{
-        setInterval(()=>{
-            setTimpRamasAzi(calculTimpRamasDinAzi())
-        },1000)
-    },[])
+    //decomenteaza final
+    
+    // useEffect(()=>{
+    //     let intervalPointer = setInterval(()=>{
+    //         setTimpRamasAzi(calculTimpRamasDinAzi())
+    //     },1000)
+    //     return(()=>{
+    //         clearInterval(intervalPointer)
+    //     })
+    // },[])
 
     const [upperDashData, setUpperDashData] = useState({
+        today_day:0,
+        today_month:0,
+        today_year:0,
         totalTasks: 0,
         totalWorkedToday:0,
         completedTasks: 0,
-        failedTasks: 0
+        failedTasks: 0,
+        categories_full_data: []
     });
     
     useEffect(()=>{
@@ -54,13 +64,16 @@ const Dashboard = ()=>{
             })
         })
         let res_json = await response.json();
+
         setUpperDashData({
+            today_day:date.getDate(),
+            today_month:date.getMonth(),
+            today_year:date.getFullYear(),
             totalTasks: res_json.totalTasks,
             totalWorkedToday: res_json.workedMinutes,
             completedTasks: res_json.completedTask,
             failedTasks: res_json.failedTasks
         })
-        console.log("aici",res_json)
     }
     const calculTimpRamasDinAzi = ()=>{
         let now = new Date();
@@ -119,9 +132,9 @@ const Dashboard = ()=>{
         switch(stateRender)
         {
             case 'lower-dash':
-                return <LowerDash />
+                return <LowerDash refetch_api={apiCurrentDay}/>
             case 'empty-lower-dash':
-                return <EmptyLowerDash/>
+                return <EmptyLowerDash />
             default:
                 return null;
         }
@@ -139,7 +152,12 @@ const Dashboard = ()=>{
                         <div className="main-stats">
                             <div className="text-data">
                                <div className="today-date">
-                                    <span>Today: 20 July 2021</span>
+                                    <span>
+                                        {`Today: 
+                                        ${upperDashData.today_day} 
+                                        ${months[upperDashData.today_month]} 
+                                        ${upperDashData.today_year}`}
+                                    </span>
                                </div>
                                <div className="today-date-info">
                                 <div className="little-card-today-info">
@@ -169,5 +187,6 @@ const Dashboard = ()=>{
         </div>
     )
 }
+
 
 export default Dashboard;

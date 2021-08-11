@@ -226,7 +226,51 @@ app.post('/check-day-info', async (req,res)=>{
     }
 })
 
-
+app.post('/increment-today-data',async (req,res)=>{
+    let date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth();
+    
+    let find_response = await Day.find({day_nr: day, month_nr:month})
+    if(find_response.length == 0)
+    {
+        res.status(500).json({error: true})
+    }
+    else
+    {
+        let data_to_increment = req.body.data_inc;
+        let today_old_obj = find_response[0];
+        switch(data_to_increment)
+        {
+            case 'failedTasks':
+                console.log("increment failedTasks")
+                let old_data_failed = today_old_obj.failedTasks;
+                let update_now_failed = await Day.findOneAndUpdate({day_nr: day, month_nr:month},{failedTasks:old_data_failed+1})
+                res.json(update_now_failed);
+                break
+            case 'completedTask':
+                console.log("increment completedTask")
+                let old_data_completed = today_old_obj.completedTask;
+                let update_now_completed = await Day.findOneAndUpdate({day_nr: day, month_nr:month},{completedTask:old_data_completed+1})
+                res.json(update_now_completed);
+                break
+            case 'workedMinutes':
+                console.log("increment workedMinutes")
+                let old_data_timer = today_old_obj.workedMinutes;
+                let update_now_timer = await Day.findOneAndUpdate({day_nr: day, month_nr:month},{workedMinutes:old_data_timer+1})
+                res.json(update_now_timer);
+                break
+            default:
+                return
+        }
+        
+        // let
+        // let taks_found = find_response[0];
+        // let old_failed_nr = taks_found.failedTasks;
+        // let update_now = await Day.findOneAndUpdate({day_nr: day, month_nr:month},{failedTasks:old_failed_nr+1})
+        // res.json(update_now);
+    }
+})
 app.listen(PORT,()=>{
     console.log(`Server is listening on port: ${PORT}`);
 })

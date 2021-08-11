@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -47,19 +47,76 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const TaskItem =({usedIn,title,content})=>{
+const TaskItem =({refetch_api,data_task})=>{
     const classes = useStyles();
 
+    useEffect(()=>{
+        console.log("in tasks", data_task)
+    },[])
+    const handleFailedTask = async ()=>{
+        let response_remove = await fetch('http://localhost:4000/remove-task',{
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: data_task._id
+            })
+        })
+        setTimeout(()=>{
+            refetch_api()
+        },2000)
+        
+        let response = await fetch('http://localhost:4000/increment-today-data',{
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                data_inc: 'failedTasks'
+            })
+        })
 
+        setTimeout(()=>{
+            refetch_api()
+        },2000)
+    }
 
+    const handleCompletedTask = async()=>{
+        let response_remove = await fetch('http://localhost:4000/remove-task',{
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: data_task._id
+            })
+        })
+        let response_increment_completed = await fetch('http://localhost:4000/increment-today-data',{
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                data_inc: 'completedTask'
+            })
+        })
+        setTimeout(()=>{
+            refetch_api()
+        },2000)
+}
     return(
         <div className="task-item-container">
             <div className="task-item-main-title">
-                <span>{title}</span>
+                <span>{data_task.title}</span>
             </div>
             <div className="task-item-container-content">
                 <span>
-                    {content}
+                    {data_task.content}
                 </span>
             </div>
             <div className="task-item-control-button">
@@ -71,6 +128,7 @@ const TaskItem =({usedIn,title,content})=>{
                 startIcon={<MoreHorizSharpIcon style={{ fontSize: 15,marginLeft: '9px' }}/>}
             />
             <Button
+                onClick={handleFailedTask}
                 size="small"
                 variant="contained"
                 color="secondary"
@@ -78,6 +136,7 @@ const TaskItem =({usedIn,title,content})=>{
                 startIcon={<SentimentVeryDissatisfiedIcon style={{ fontSize: 15,marginLeft: '8px' }}/>}
             />
             <Button
+                onClick={handleCompletedTask}
                 size="small"
                 variant="contained"
                 color="secondary"
