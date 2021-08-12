@@ -43,6 +43,9 @@ const ScheduleNew = ()=>
 {
     const classes = useStyles();
 
+    const [dayInThePast, setDayInThePast] = useState(false);
+
+
     //show indicator = true daca nu este nicio categorie pentru ziua x
     const [showIndicator, setShowIndicator] = useState({
         show: true,
@@ -52,7 +55,6 @@ const ScheduleNew = ()=>
 
     //categories care ca default necesar, null
     const [categories, setCategories] = useState(null);
-
     const [modal, setModal] = useState(false);
     const handleModalChange = ()=>{
         setModal((prev)=>!prev)
@@ -60,7 +62,50 @@ const ScheduleNew = ()=>
     const handleModalClose = ()=>{
         setModal(false)
     }
-    
+    useEffect(()=>{
+        //functie de subscrube
+        store.subscribe(()=>{
+            functionalitateSetareTrecutPrezent()
+        })
+
+        //functie care executa pe loc
+        functionalitateSetareTrecutPrezent()
+       
+    },[])
+
+
+
+    const functionalitateSetareTrecutPrezent = ()=>{
+        let date = new Date();
+        let today_day = date.getDate();
+        let today_month= date.getMonth();
+
+        let store_redux = store.getState();
+        let redux_day = store_redux.scheduleState.selectedDay;
+        let redux_month = store_redux.scheduleState.selectedMonth;
+        if(redux_month < today_month)
+        {
+            console.log("Luna trecuta!")
+            setDayInThePast(true);
+        }
+        else if(redux_month == today_month && redux_day <= today_day)
+        {
+            console.log("Luna curenta, dar zi din trecut!")
+            setDayInThePast(true);
+        }
+        else if(redux_month == today_month && redux_day > today_day)
+        {
+            console.log("luna curnata, zi din viitor")
+            setDayInThePast(false);
+        }
+        else if(redux_month > today_month)
+        {
+            console.log("luna viitoare!")
+            setDayInThePast(false);
+        }
+    }
+
+
     useEffect(()=>{
         store.subscribe(()=>{
             let data = store.getState();
@@ -76,6 +121,11 @@ const ScheduleNew = ()=>
             
         })
     },[])
+
+    //setDayInThePast
+
+
+
     useEffect(()=>{
         if(categories != null)
         {

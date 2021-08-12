@@ -101,6 +101,7 @@ const Calendar = ()=>{
         //changeState to cheduleOld
         //else
         //changeState to scheduleNew
+
         if(arrayChecked.includes(day_number))
         {
             changeStateEmptyCategories('schedule-old',day_number, numberMonth)

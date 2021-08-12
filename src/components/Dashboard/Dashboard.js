@@ -83,11 +83,31 @@ const Dashboard = ()=>{
             today_month:date.getMonth(),
             today_year:date.getFullYear(),
             totalTasks: res_json.totalTasks,
-            totalWorkedToday: res_json.workedMinutes,
+            totalWorkedToday: convertTenSecToTime(res_json.workedMinutes),
             completedTasks: res_json.completedTask,
             failedTasks: res_json.failedTasks,
             timeLeft: calculTimpRamasDinAzi()
         })
+    }
+    //res_json.workedMinutes,
+    const convertTenSecToTime = (tenSeconds)=>{
+        //in baza de date, timpul workedTime este stocat in multiplii de 10 (la fiecare 10 secune, se incrementeaza cu 1)
+        let pure_seconds = tenSeconds *10;
+        if(pure_seconds <60)
+        {
+            return `< 1m`
+        }
+        else if(pure_seconds >=60 && pure_seconds < 3600)
+        {
+            let minutes = Math.floor(pure_seconds/60);
+            return `0h ${minutes}m`
+        }
+        else
+        {
+            let hours = Math.floor(pure_seconds/3600);
+            let minutes =Math.floor((pure_seconds - hours*3600)/60);
+            return `${hours}h ${minutes}m`
+        }
     }
     const calculTimpRamasDinAzi = ()=>{
         let now = new Date();
