@@ -123,3 +123,4 @@ export const timeData = {
 }
 
 export let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+export let exact_month_width = [31,28,28,30,30,27,31,31,30,31,30,31];

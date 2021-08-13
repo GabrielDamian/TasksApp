@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap');
+.stats-container
+{
+    height: 100vh;
+    width: 100%;
+    padding: 30px;
+}
+.stats-container-padding
+{
+    border: 1px solid red;
+    height: 100%;
+}
+.stats-container-title
+{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 900;
+    font-size: 1vw;
+
+}
+.chart-system-container
+{
+    position: relative;
+    height: 40vh;
+}
+.stats-container-custom-data
+{
+    height: 48vh;
+    border: 1px solid magenta;
+}
+.custom-data-date-picker
+{
+    height: 15%;
+    border: 1px solid maroon;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.custom-data-date-displayer
+{
+    height: 85%;
+    border: 1px solid blue;
+}

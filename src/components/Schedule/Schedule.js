@@ -12,6 +12,10 @@ const Schedule = ()=>{
 
     const [currentState, setCurrentState] = useState('empty-state');
 
+
+
+
+
     useEffect(()=>{
         store.subscribe(()=>{
 
@@ -20,7 +24,7 @@ const Schedule = ()=>{
             setCurrentState(currentReduxState);
         })
         
-    })
+    },[])
     const handleStateJSX = ()=>{
         switch(currentState)
         {

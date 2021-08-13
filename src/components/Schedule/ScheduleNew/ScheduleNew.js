@@ -43,9 +43,6 @@ const ScheduleNew = ()=>
 {
     const classes = useStyles();
 
-    const [dayInThePast, setDayInThePast] = useState(false);
-
-
     //show indicator = true daca nu este nicio categorie pentru ziua x
     const [showIndicator, setShowIndicator] = useState({
         show: true,
@@ -62,20 +59,17 @@ const ScheduleNew = ()=>
     const handleModalClose = ()=>{
         setModal(false)
     }
-    useEffect(()=>{
-        //functie de subscrube
-        store.subscribe(()=>{
-            functionalitateSetareTrecutPrezent()
-        })
+ 
 
-        //functie care executa pe loc
-        functionalitateSetareTrecutPrezent()
-       
+    useEffect(()=>{
+        store.subscribe(()=>{
+            console.log("update la store:",functionalitateSetareTrecutPrezent())
+        })
+        console.log("initial:",functionalitateSetareTrecutPrezent())
     },[])
 
-
-
     const functionalitateSetareTrecutPrezent = ()=>{
+        //true - ziua est in trecut
         let date = new Date();
         let today_day = date.getDate();
         let today_month= date.getMonth();
@@ -86,22 +80,22 @@ const ScheduleNew = ()=>
         if(redux_month < today_month)
         {
             console.log("Luna trecuta!")
-            setDayInThePast(true);
+            return true;
         }
         else if(redux_month == today_month && redux_day <= today_day)
         {
             console.log("Luna curenta, dar zi din trecut!")
-            setDayInThePast(true);
+            return true;
         }
         else if(redux_month == today_month && redux_day > today_day)
         {
             console.log("luna curnata, zi din viitor")
-            setDayInThePast(false);
+            return false;
         }
         else if(redux_month > today_month)
         {
             console.log("luna viitoare!")
-            setDayInThePast(false);
+            return false;
         }
     }
 
@@ -195,12 +189,27 @@ const ScheduleNew = ()=>
             
         )
     }
+
+    // const mesajEmptyPastDay = ()=>{
+    //     if(functionalitateSetareTrecutPrezent() == true)
+    //     {
+    //         return <span>Nu poti decat vizualiza zile din trecut (inclusiv cea de azi).</span>
+    //     }
+    //     else if(showIndicator.show == true)
+    //     {
+    //         return <span>{showIndicator.text}</span>
+    //     }
+    //     else
+    //     {
+    //         return null;
+    //     }
+    // }
     return(
        <div className="schedulenew-container">
            <div className="schedulenew-container-padding">
                <div className="schedulenew-container-title-tab">
                    <div className="schedulenew-title-indication">
-                        {showIndicator.show ? 
+                   {showIndicator.show ? 
                         <span>{showIndicator.text}</span>
                             :
                         null

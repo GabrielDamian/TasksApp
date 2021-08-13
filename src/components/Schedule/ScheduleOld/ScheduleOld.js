@@ -13,6 +13,45 @@ const ScheduleOld = ()=>
     const [serverData, setServerData] = useState(null);
 
     useEffect(()=>{
+        store.subscribe(()=>{
+            console.log("update la store:",functionalitateSetareTrecutPrezent());
+        })
+        console.log("initial:",functionalitateSetareTrecutPrezent())
+    },[])
+
+    const functionalitateSetareTrecutPrezent = ()=>{
+        //true - ziua est in trecut
+        let date = new Date();
+        let today_day = date.getDate();
+        let today_month= date.getMonth();
+
+        let store_redux = store.getState();
+        let redux_day = store_redux.scheduleState.selectedDay;
+        let redux_month = store_redux.scheduleState.selectedMonth;
+        if(redux_month < today_month)
+        {
+            console.log("Luna trecuta!")
+            return true;
+        }
+        else if(redux_month == today_month && redux_day <= today_day)
+        {
+            console.log("Luna curenta, dar zi din trecut!")
+            return true;
+        }
+        else if(redux_month == today_month && redux_day > today_day)
+        {
+            console.log("luna curnata, zi din viitor")
+            return false;
+        }
+        else if(redux_month > today_month)
+        {
+            console.log("luna viitoare!")
+            return false;
+        }
+    }
+
+
+    useEffect(()=>{
         //setam listener pentru day si month din store
         store.subscribe(()=>{
             let storeState = store.getState();

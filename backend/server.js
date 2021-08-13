@@ -272,6 +272,170 @@ app.post('/increment-today-data',async (req,res)=>{
         // res.json(update_now);
     }
 })
+
+
+app.post('/stats-day-picker',async (req,res)=>{
+    let days = req.body.days;
+    console.log("asdas",days)
+    let exact_month_width = [31,28,28,30,30,27,31,31,30,31,30,31];
+    
+    let temp_date = new Date();
+    let today_day = temp_date.getDate();
+    let today_month = temp_date.getMonth();
+    
+    if(days == 1)
+    {
+        console.log("CASE 1");
+        let day_to_find =null;
+        let month_to_find = null;
+        if(today_day == 1)
+        {
+            day_to_find = exact_month_width[today_month-1];
+            month_to_find = today_month -1;
+            console.log("sunt pe 1' of the mont, caut pe:", day_to_find)
+        }
+        else
+        {
+            day_to_find = today_day -1;
+            month_to_find = today_month;
+        }
+        //caut atat ieri cat si azi
+        let yesteday_arr = await Day.find({
+            $or: [
+                {
+                    month_nr: month_to_find,
+                    day_nr: day_to_find
+            },
+                {
+                    month_nr: today_month,
+                    day_nr: today_day
+            }
+    ]
+        })
+
+
+        console.log("/yesterday_arr", yesteday_arr);
+        res.json({
+            arr_days: [...yesteday_arr]
+        })
+    }
+    else 
+    {
+        //mai multe zile
+
+        
+        //toate zilele cerute sunt din luna curenta
+        if(days < today_day)
+        {
+            console.log("CASE 2");
+            let temp_date = new Date();
+            let today_day = temp_date.getDate();
+            let today_month = temp_date.getMonth();
+            
+            let start_date = today_day - days;
+            let arr_conditii = [];
+
+
+            for(let i=start_date;i<=today_day;i++)
+            {
+                let temp_obj = {
+                    month_nr: today_month,
+                    day_nr: i
+                }
+                arr_conditii.push({...temp_obj})
+            }
+            console.log("arr conditii", arr_conditii)
+            let date_filtrate = await Day.find({
+                $or:[...arr_conditii]
+            })
+            console.log("zile din luna curenta", date_filtrate)
+            res.json({pola: 'pola'})
+        }
+        else
+        {
+            console.log("CASE 3");
+            //luna trecuta + luna curenta
+            let temp_date = new Date();
+            let today_day = temp_date.getDate();
+            let today_month = temp_date.getMonth();
+
+            let zile_din_luna_trecuta = days-today_day;
+
+            let arr_conditii = []
+
+
+            //prelucrare luna trecuta
+            let max_zile_luna_trecuta = exact_month_width[today_month-1];
+            for(let j=max_zile_luna_trecuta - zile_din_luna_trecuta; j<=max_zile_luna_trecuta;j++)
+            {
+                let temp_obj = {
+                    month_nr: today_month-1,
+                    day_nr: j
+                }
+                arr_conditii.push(temp_obj)
+            }
+            
+            //prelucrat luna curenta
+            for(let i=0;i<=today_day;i++)
+            {
+                let temp_obj = {
+                    month_nr: today_month,
+                    day_nr: i
+                }
+                arr_conditii.push(temp_obj)
+            }
+
+
+            console.log("arr conditii", arr_conditii)
+            let date_filtrate = await Day.find({
+                $or:[...arr_conditii]
+            })
+
+
+            let date_filtrate_crescator = [];
+            date_filtrate.forEach((el)=>{
+                if(el.month_nr == today_month -1)
+                {
+                    date_filtrate_crescator.push(el);
+                }    
+            })
+            date_filtrate.forEach((el)=>{
+                if(el.month_nr == today_month)
+                {
+                    date_filtrate_crescator.push(el);
+                }    
+            })
+
+            console.log("zile din luna trecuta_curenta", date_filtrate_crescator)
+            res.json({
+                arr_crescator: date_filtrate_crescator
+            })
+            
+        }
+    }
+    //res.json({pola: 'pola'})
+})
+
+app.post('/insert_old_day', (req,res)=>{
+    let day = req.body.day;
+
+    let temp_date = new Date();
+
+    let newDay = new Day({
+        day_nr: day,
+        month_nr: temp_date.getMonth()-1,
+        totalTasks: 2324,
+        workedMinutes: 3,
+        completedTask: 3,
+        failedTasks: 2,
+        uncompletedTasks:5
+    })
+
+    newDay
+            .save()
+            .then((new_created_day)=>{res.json(new_created_day)})
+            .catch((err)=>{console.log(err)})
+})
 app.listen(PORT,()=>{
     console.log(`Server is listening on port: ${PORT}`);
 })
