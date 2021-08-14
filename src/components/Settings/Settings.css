@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap');
+.settings-container
+{
+    height: 100vh;
+    width: 100%;
+    padding: 30px;
+    background-color: #F9F9F9;
+}
+.settings-container-padding
+{
+    height: 100vh;
+    width: 100%;
+}
+.settings-title
+{
+    height: 5%;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 900;
+    font-size: 1vw;
+}
+.settins-faq
+{
+    height: 80%;
+}
+
+.settings-faq-padding
+{
+    height: 100%;
+    border-radius: 10px;
+    border: 2px solid #dfdfdf;
+    padding: 20px;
+    background-color: white;
+    font-family: 'Ubunu', sans-serif;
+}
+.faq-eleme-container
+{
+    border-radius: 10px;
+    border: 2px solid #c4c4c4;
+    padding: 20px;
+    background-color: rgb(223, 223, 223);
+    margin: 15px 0px;
+    font-family: 'Ubuntu', sans-serif;
+}
+.faq-eleme-container h4
+{
+    margin-bottom: 5px;
+}

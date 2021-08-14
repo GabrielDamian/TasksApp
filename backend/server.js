@@ -283,6 +283,8 @@ app.post('/stats-day-picker',async (req,res)=>{
     let today_day = temp_date.getDate();
     let today_month = temp_date.getMonth();
     
+    let vector_date = [];
+    
     if(days == 1)
     {
         console.log("CASE 1");
@@ -313,11 +315,10 @@ app.post('/stats-day-picker',async (req,res)=>{
     ]
         })
 
-
-        console.log("/yesterday_arr", yesteday_arr);
         res.json({
-            arr_days: [...yesteday_arr]
+            arr_crescator: yesteday_arr
         })
+
     }
     else 
     {
@@ -348,8 +349,11 @@ app.post('/stats-day-picker',async (req,res)=>{
             let date_filtrate = await Day.find({
                 $or:[...arr_conditii]
             })
-            console.log("zile din luna curenta", date_filtrate)
-            res.json({pola: 'pola'})
+
+            res.json({
+                arr_crescator: date_filtrate
+            })
+
         }
         else
         {
@@ -423,12 +427,12 @@ app.post('/insert_old_day', (req,res)=>{
 
     let newDay = new Day({
         day_nr: day,
-        month_nr: temp_date.getMonth()-1,
-        totalTasks: 2324,
-        workedMinutes: 3,
-        completedTask: 3,
-        failedTasks: 2,
-        uncompletedTasks:5
+        month_nr: temp_date.getMonth(),
+        totalTasks: 1,
+        workedMinutes: 5,
+        completedTask: 7,
+        failedTasks: 3,
+        uncompletedTasks:1
     })
 
     newDay
@@ -436,6 +440,20 @@ app.post('/insert_old_day', (req,res)=>{
             .then((new_created_day)=>{res.json(new_created_day)})
             .catch((err)=>{console.log(err)})
 })
+
+
+app.post('/delete-old-day',async (req,res)=>{
+    let id = req.body.id;
+    let resp = await Day.findByIdAndDelete(id)
+    .then((s)=>{
+        res.json({pola: 'pola'})
+    })
+})
+
+
+
+
 app.listen(PORT,()=>{
     console.log(`Server is listening on port: ${PORT}`);
 })
+

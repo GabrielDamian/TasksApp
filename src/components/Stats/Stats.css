@@ -7,7 +7,6 @@
 }
 .stats-container-padding
 {
-    border: 1px solid red;
     height: 100%;
 }
 .stats-container-title
@@ -25,12 +24,10 @@
 .stats-container-custom-data
 {
     height: 48vh;
-    border: 1px solid magenta;
 }
 .custom-data-date-picker
 {
     height: 15%;
-    border: 1px solid maroon;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -38,5 +35,40 @@
 .custom-data-date-displayer
 {
     height: 85%;
-    border: 1px solid blue;
+    padding: 5px;
+}
+.table-stats-container
+{
+    height: 100%;
+}
+.table-stats-container span
+{
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.table-stats-table
+{
+    width: 100%;
+}
+table {
+    width: 100%;
+    max-width: 100%;
+    overflow-y: scroll;
+    font-family: 'Ubuntu', sans-serif;
+
+}
+table, th, td {
+    border: 1px solid rgb(92, 92, 92);
+    border-collapse: collapse;
+}
+tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+.table-row-headings
+{
+    height: 30px;
+}
+td
+{
+    text-align: center;
 }
