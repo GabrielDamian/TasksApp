@@ -11,6 +11,7 @@ import {
 } from '../../../Redux/actions';
 
 import store from '../../../Redux/store';
+import {backEndApi} from '../../../apiLinks';
 
 
 
@@ -29,7 +30,7 @@ const Calendar = ()=>{
     const [arrayChecked, setArrayChecked] = useState([])
 
     const daysChecked = async()=>{
-        let days = await fetch('http://localhost:4000/checked-days-in-month',{
+        let days = await fetch(`${backEndApi}/checked-days-in-month`,{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

@@ -1,0 +1,1 @@
+//!= undefined previne cazul in care am dat click pe alta zi si am

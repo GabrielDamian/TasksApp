@@ -4,6 +4,8 @@ import OldTaskItem from './OldTaskItem';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import {backEndApi} from '../../../../apiLinks';
+
 const useStyles = makeStyles((theme) => ({
     deleteCat: {
         margin: '0px',
@@ -20,7 +22,7 @@ const OldCatItself = ({cat_name,tasks,fct_refetch})=>{
     const classes = useStyles();
 
     const apiDeleteCat = async()=>{
-        let response = await fetch('http://localhost:4000/remove-entire-category',{
+        let response = await fetch(`${backEndApi}/remove-entire-category`,{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

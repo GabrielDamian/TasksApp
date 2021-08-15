@@ -7,6 +7,7 @@ import Cards from './Cards/Cards';
 import LowerDash from './LowerDash/LowerDash';
 import EmptyLowerDash from './EmptyLowerDash/EmptyLowerDash';
 import {months} from '../../temp';
+import {backEndApi} from '../../apiLinks';
 
 const Dashboard = ()=>{
 
@@ -65,7 +66,7 @@ const Dashboard = ()=>{
         let day_nr = date.getDate();
         let month_nr = date.getMonth();
 
-        let response = await fetch('http://localhost:4000/check-day-info',{
+        let response = await fetch(`${backEndApi}/check-day-info`,{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -138,7 +139,7 @@ const Dashboard = ()=>{
         let date = new Date();
         let todayDay = date.getDate();
         let todayMonth = date.getMonth();
-        let response = await fetch('http://localhost:4000/check-empty-day',{
+        let response = await fetch(`${backEndApi}/check-empty-day`,{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

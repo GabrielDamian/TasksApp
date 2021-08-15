@@ -5,6 +5,7 @@ import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
 import { purple } from '@material-ui/core/colors';
+import {backEndApi} from '../../../apiLinks';
 
 const theme = createTheme({
     palette: {
@@ -45,7 +46,7 @@ const SwitchButton = ({refetch_api})=>{
     })
     const incrementTimerApi = async ()=>
     {
-      let response = await fetch('http://localhost:4000/increment-today-data',{
+      let response = await fetch(`${backEndApi}/increment-today-data`,{
         method: 'POST',
         headers: {
             'Accept': 'application/json',

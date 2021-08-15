@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import './LowerDash.css';
 import SwitchButton from './SwitchButton';
 import CategoryTasks from './CategoryTasks';
+import {backEndApi} from '../../../apiLinks';
 
 const LowerDash = ({refetch_api,upperDashData})=>{
 
@@ -31,7 +32,7 @@ const LowerDash = ({refetch_api,upperDashData})=>{
         let day_nr = date.getDate();
         let month_nr = date.getMonth();
 
-        let response = await fetch('http://localhost:4000/info-old-day',{
+        let response = await fetch(`${backEndApi}/info-old-day`,{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

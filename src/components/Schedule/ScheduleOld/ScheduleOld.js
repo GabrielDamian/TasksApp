@@ -2,6 +2,8 @@ import React,{useEffect, useState} from 'react';
 import './ScheduleOld.css';
 import store from '../../../Redux/store';
 import OldCategories from './OldCategories/OldCategories';
+import {backEndApi} from '../../../apiLinks';
+
 
 const ScheduleOld = ()=>
 {
@@ -75,7 +77,7 @@ const ScheduleOld = ()=>
 
 
     const fetchOldServerData = async()=>{
-        let response = await fetch('http://localhost:4000/info-old-day',{
+        let response = await fetch(`${backEndApi}/info-old-day`,{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

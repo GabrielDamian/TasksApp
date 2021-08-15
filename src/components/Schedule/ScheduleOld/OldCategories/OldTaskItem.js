@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import MoreHorizSharpIcon from '@material-ui/icons/MoreHorizSharp';
 import Popover from '@material-ui/core/Popover';
 import DeleteIcon from '@material-ui/icons/Delete';
+import {backEndApi} from '../../../../apiLinks';
 
 const useStyles = makeStyles((theme) => ({
     buttonRed: {
@@ -60,7 +61,7 @@ const OldTaskItem = ({data,fct_refetch})=>{
     // * pop-over finished
     
     const delete_from_api = async()=>{
-        let response = await fetch('http://localhost:4000/remove-task',{
+        let response = await fetch(`${backEndApi}/remove-task`,{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

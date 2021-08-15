@@ -11,6 +11,7 @@ import NewCategory from './NewCategory/NewCategory';
 import Modal from '@material-ui/core/Modal';
 import ModalComp from './ModalComp';
 import {changeStateEmptyCategories,} from '../../../Redux/actions';
+import {backEndApi} from '../../../apiLinks';
 
 const theme_1 = createTheme({
   palette: {
@@ -158,7 +159,11 @@ const ScheduleNew = ()=>
         if(checkCategoriesBeforeSave())
         {
             asyncPOST();
-            window.location.reload();
+            setTimeout(()=>{
+                console.log("pola1")
+                window.location.reload();
+            },3000)
+            
         }
         else
         {
@@ -174,7 +179,7 @@ const ScheduleNew = ()=>
         // console.log("day",store.getState().scheduleState.selectedDay)
         // console.log("month",store.getState().scheduleState.selectedMonth)
 
-        let response = await fetch('http://localhost:4000/post-new-tasks',{
+        let response = await fetch(`${backEndApi}/post-new-tasks`,{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -185,9 +190,8 @@ const ScheduleNew = ()=>
                 day: store.getState().scheduleState.selectedDay,
                 month: store.getState().scheduleState.selectedMonth
             })
-        }
-            
-        )
+        })
+        console.log("dupa ce am salvate new todos in db");
     }
 
     // const mesajEmptyPastDay = ()=>{

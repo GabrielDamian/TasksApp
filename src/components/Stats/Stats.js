@@ -8,6 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import TableStats from './TableStats';
+import {backEndApi} from '../../apiLinks';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -41,7 +42,7 @@ const Stats = ()=>{
     },[selectedPeriod])
 
     const fetchAPI = async ()=>{
-        let response = await fetch('http://localhost:4000/stats-day-picker',{
+        let response = await fetch(`${backEndApi}/stats-day-picker`,{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -67,7 +68,7 @@ const Stats = ()=>{
         deleteFromApi()
     }
     const deleteFromApi = async ()=>{
-        let response = await fetch('http://localhost:4000/delete-old-day',{
+        let response = await fetch(`${backEndApi}/delete-old-day`,{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

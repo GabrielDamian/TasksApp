@@ -9,6 +9,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import CheckSharpIcon from '@material-ui/icons/CheckSharp';
 import MoreHorizSharpIcon from '@material-ui/icons/MoreHorizSharp';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import {backEndApi} from '../../../apiLinks';
 
 const useStyles = makeStyles((theme) => ({
     buttonRed: {
@@ -54,7 +55,7 @@ const TaskItem =({refetch_api,data_task})=>{
         console.log("in tasks", data_task)
     },[])
     const handleFailedTask = async ()=>{
-        let response_remove = await fetch('http://localhost:4000/remove-task',{
+        let response_remove = await fetch(`${backEndApi}/remove-task`,{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -69,7 +70,7 @@ const TaskItem =({refetch_api,data_task})=>{
             refetch_api()
         },2000)
 
-        let response = await fetch('http://localhost:4000/increment-today-data',{
+        let response = await fetch(`${backEndApi}/increment-today-data`,{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -86,7 +87,7 @@ const TaskItem =({refetch_api,data_task})=>{
     }
 
     const handleCompletedTask = async()=>{
-        let response_remove = await fetch('http://localhost:4000/remove-task',{
+        let response_remove = await fetch(`${backEndApi}/remove-task`,{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -96,7 +97,7 @@ const TaskItem =({refetch_api,data_task})=>{
                 id: data_task._id
             })
         })
-        let response_increment_completed = await fetch('http://localhost:4000/increment-today-data',{
+        let response_increment_completed = await fetch(`${backEndApi}/increment-today-data`,{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
