@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 const Todo = require('./models/Todo');
 const Day = require('./models/Day');
 
@@ -29,6 +29,7 @@ app.get('/',(req,res)=>{
 
 // '/all-todos' -  return all content from Todo document type from db
 app.get('/all-todos',(req,res)=>{
+    console.log("All todos route!")
     Todo.find((err,todos)=>{
         if(err){
             console.log(err)
