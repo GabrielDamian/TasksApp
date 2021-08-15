@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
-const PORT = 4000;
+const PORT = process.env.PORT || 5000;
 const Todo = require('./models/Todo');
 const Day = require('./models/Day');
 
