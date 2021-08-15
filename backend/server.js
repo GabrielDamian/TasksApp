@@ -5,7 +5,16 @@ const PORT = 4000;
 const Todo = require('./models/Todo');
 const Day = require('./models/Day');
 
-mongoose.connect('mongodb://127.0.0.1:27017/todo-app',{useNewUrlParser: true});
+//mongoose.connect('mongodb://127.0.0.1:27017/todo-app',{useNewUrlParser: true});
+let connection_url = 'mongodb+srv://damian:panteraroz@cluster0.mojfk.mongodb.net/todo-app?retryWrites=true&w=majority'
+mongoose.connect(connection_url,{
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+
+});
+
+
 mongoose.connection.once('open',()=>{
     console.log("Mongodb connection established successfully");
 })
