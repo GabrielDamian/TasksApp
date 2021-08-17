@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap');
+.old-cat-itself-container
+{
+    height: 100%; 
+    width: 25%;
+    padding: 0px 5px;
+}
+.old-cat-itself-cont-padding
+{
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid #cccccc;
+    background-color: #E9E9E9;
+}
+.old-cat-title
+{
+    height: 10%;
+    padding: 3px;
+    font-family: 'Ubuntu', sans-serif;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+}
+.old-cat-title-single
+{
+    height: 100%;
+    width: 85%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.old-cat-title-single span
+{
+    margin-left: 10px;
+}
+.old-cat-title-remove-cat-btn
+{
+    height: 100%;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.old-cat-content-tasks
+{
+    height: 90%;
+    overflow-y: scroll;
+    padding:
+}
+/* scroll bar */
+#style-6::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
+	background-color: #ffffff;
+}
+
+#style-6::-webkit-scrollbar
+{
+	width: 3px;
+	background-color: #F5F5F5;
+}
+
+#style-6::-webkit-scrollbar-thumb
+{
+	background-color: #929292;
+	border: 2px solid #929292;
+}
+/* end of scroll bar */
+.old-task-item-container
+{
+    height: 85px;
+    margin: 10px 5px;
+    border-radius: 10px;
+    border: 2px solid #cacaca;
+    background-color: white;
+}
+.old-task-item-title
+{
+    height: 25%;
+    text-align: center;
+    padding: 2px;
+    font-size: 0.9em;
+    font-family: 'Ubuntu', sans-serif;
+}
+.old-task-item-main-content
+{
+    height: 75%;
+}
+.old-task-item-main-content-text{
+    height: 50%;
+    padding: 5px;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 0.8rem;
+}
+.old-task-item-main-content-buttons
+{
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 3px;
+}

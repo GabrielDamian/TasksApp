@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+.calendar-container
+{
+    width: 70%;
+    height: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #EBEBEB;
+    border: 2px solid #cfcfcf;
+    font-family: 'Ubuntu';
+}
+.calendar-container-padding
+{
+    width: 100%;
+    height: 100%; 
+}
+.calendar-upper
+{
+    width: 100%;
+    height: 25%;
+}
+.calendar-lower
+{
+    width: 100%;
+    height: 75%;
+}
+.calendar-month-selector
+{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.calendar-month-selector img 
+{
+    height: 15px;
+}
+.calendar-month-selector span 
+{
+    font-size: 1.5rem;
+
+    font-weight: 900;
+}
+.calendar-week-day
+{
+    width: 100%;
+    height: 50%; 
+    display: flex;
+    flex-direction: row;
+}
+.week-day-item-indicator
+{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #a29bfe;
+}
+.calendar-lower-week-row
+{
+    width: 100%;
+    height: 16.6%;
+    display: flex;
+    flex-direction: row;
+}
+.day-itself
+{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3px;
+    border-radius: 3px;
+    background-color: white;   
+    border: 2px solid #cfcfcf;
+}
+.day-itself-number
+{
+    height: 100;
+    width: 50%;
+    font-size: 0.8rem;
+}
+.day-itself-checked
+{
+    height: 70%;
+}
+.reduced-opacity
+{
+    opacity: 0.5;
+}
+.today-selector
+{
+    border: 2px solid red;
+}
+.selected-day
+{
+    border: 2px solid blue;
+}

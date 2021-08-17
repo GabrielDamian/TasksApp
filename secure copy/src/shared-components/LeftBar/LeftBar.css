@@ -1,0 +1,83 @@
+/*main font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+/*logo fonts */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+/* a29bfe - rgb for selected item bar */
+.left-bar-container{
+    height: 100vh;
+    width: 15%;
+    min-width: 250px;
+    -webkit-box-shadow: 5px 0px 14px -11px rgba(0,0,0,0.29); 
+    box-shadow: 5px 0px 14px -11px rgba(0,0,0,0.29);
+    overflow: hidden;
+}
+.logo-container
+{
+    height: 75px;
+    -webkit-box-shadow: -10px 0px 16px -6px rgba(0,0,0,0.32); 
+    box-shadow: -10px 0px 16px -6px rgba(0,0,0,0.32);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.bar-item-container
+{
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid transparent;
+    border-left: 5px solid transparent;
+}
+.bar-item-container-selected
+{
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid transparent;
+    border-left: 5px solid #a29bfe;
+}
+.center-items
+{
+    height: 80%;
+    width: 80%;
+    display: flex;
+    align-items: center;
+}
+.center-items > span{
+    margin-left: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+}
+.icon
+{
+    margin-left: 10px;
+}
+.icon > img 
+{
+    height: 25px;
+}
+#main-logo
+{
+    height: 45px;
+}
+.logo-text
+{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 30px;
+}
+#bold-logo-text{
+    font-weight: 900;
+    color: #a29bfe;
+}
+.unselected-item-bar
+{
+    color: #848484;
+}
+.selected-item-bar
+{
+    color: black;
+}

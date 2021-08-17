@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+.empty-lower-dash-container
+{
+    height: 50%;
+    padding: 15px;
+    font-family: 'Ubuntu', sans-serif;
+}

@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+.lower-dash-container
+{
+    width: 100%;
+    height: 100%;
+}
+.task-intro
+{
+    width: 100%;
+    height: 7%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 20px;
+    font-family: 'Poppins', sans-serif;
+
+}
+.switch-button-contaier
+{
+    height: 40px;
+    width: 130px;
+    margin-left: 20px;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.lower-dash-content
+{
+    width: 100%;
+    height: 93%;
+}
+.lower-dash-content-padding
+{
+    width: 100%;
+    height: 100%;
+    /* background-color: #E9E9E9; */
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+.category-container
+{
+    height: 100%;
+    width: 25%;
+    margin: 0px 5px;
+    background-color: #F9F9F9; 
+    border-radius: 10px;
+    border: 2px solid #EBEBEB;
+}
+.category-title
+{
+    width:100%;
+    height: 10%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.category-title p 
+{
+    margin-left: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+.task-category-container
+{
+    margin-top: 5px;
+    max-height: 90%;
+    overflow-y: scroll;
+}
+.task-category-container >div:first-child{
+    margin-top: 8px;
+}
+.task-item-container
+{
+    height: 90px;
+    width: 96%;
+    background-color: white;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px; 
+    border: 2px solid #EBEBEB;
+    text-align: center;   
+}
+
+/* scrolll bar */
+#style-4::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
+	background-color: #ffffff;
+}
+
+#style-4::-webkit-scrollbar
+{
+	width: 3px;
+	background-color: #F5F5F5;
+}
+
+#style-4::-webkit-scrollbar-thumb
+{
+	background-color: #929292;
+	border: 2px solid #929292;
+}
+/*end of scroll bar */
+.task-item-main-title
+{
+    width: 100%;
+    height: 30%;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1vw;
+    text-align: center;
+
+}
+.task-item-main-title span 
+{
+    margin-left: 5px;
+}
+.task-item-container-content
+{
+    width: 100%;
+    height: 40%;
+    font-size: 0.8vw;
+    font-family: 'Poppins',sans-serif;
+}
+.task-item-control-button
+{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
