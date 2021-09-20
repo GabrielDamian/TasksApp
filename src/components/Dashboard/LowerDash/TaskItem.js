@@ -122,13 +122,13 @@ const TaskItem =({refetch_api,data_task})=>{
                 </span>
             </div>
             <div className="task-item-control-button">
-            <Button
+            {/* <Button
                 size="small"
                 variant="contained"
                 color="secondary"
                 className={classes.buttonBlue}
                 startIcon={<MoreHorizSharpIcon style={{ fontSize: 15,marginLeft: '9px' }}/>}
-            />
+            /> */}
             <Button
                 onClick={handleFailedTask}
                 size="small"
