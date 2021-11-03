@@ -10,7 +10,7 @@ let connection_url = 'mongodb+srv://damian:panteraroz@cluster0.mojfk.mongodb.net
 
 let connect_to_mongose = async ()=>{
     try {
-        let ceva_pola = await mongoose.connect(connection_url, {
+        let temp_test = await mongoose.connect(connection_url, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true
@@ -440,7 +440,6 @@ app.post('/stats-day-picker',async (req,res)=>{
             
         }
     }
-    //res.json({pola: 'pola'})
 })
 
 app.post('/insert_old_day', (req,res)=>{
@@ -469,7 +468,7 @@ app.post('/delete-old-day',async (req,res)=>{
     let id = req.body.id;
     let resp = await Day.findByIdAndDelete(id)
     .then((s)=>{
-        res.json({pola: 'pola'})
+        res.json({test: 'test'})
     })
 })
 
