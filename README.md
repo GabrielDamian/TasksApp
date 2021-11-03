@@ -1,4 +1,4 @@
-# Tasks manager App
+# Tasks Manager React App
 
 CRUD Application to manage your daily tasks and work time. You can schedule future tasks based on calendar and used them when that day will come out in dashboard. Statistics sections shows your performance at managing all those tasks.
  
